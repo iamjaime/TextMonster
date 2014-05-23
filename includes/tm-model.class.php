@@ -20,5 +20,37 @@ class tm_model{
 		
 	}
 	
+	/**
+	 * 
+	 * @global class $wpdb the wp db class
+	 * @param string $state the 2 letter state abbreviation
+	 * @param string $city the city in that specific state
+	 * @param string $county the county in that specific state
+	 * @return array the target data
+	 */
+	public function getTargetData($state, $city=null, $county=null)
+	{
+		global $wpdb;
+		
+		//if we only have state and city and county are null
+		$sql = "SELECT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}'";
+		
+		//if we have state and city
+		if($state != null && $city != null)
+		{
+			$sql = "SELECT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City='{$city}'";
+		}
+		//if we have state and city and county
+		if($state != null && $city != null && $county != null)
+		{
+			$sql = "SELECT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City='{$city}' AND County='{$county}'";
+		}
+		
+		$data = $wpdb->get_results($sql);
+		
+		return $data;
+		
+	}
+	
 	
 }
