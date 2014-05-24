@@ -9,7 +9,8 @@ class tm_model{
 	 * @param int $id the user id that we want info for
 	 * @return array the authorized lines for this user
 	 */
-	public function getAuthLine($id){
+	public function getAuthLine($id)
+	{
 		/* This Function will get Authorized Cell Number */
 		global $wpdb;
 		
@@ -33,24 +34,40 @@ class tm_model{
 		global $wpdb;
 		
 		//if we only have state and city and county are null
-		$sql = "SELECT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}'";
+		$sql = "SELECT DISTINCT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}'";
 		
 		//if we have state and city
 		if($state != null && $city != null)
 		{
-			$sql = "SELECT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City='{$city}'";
+			$sql = "SELECT DISTINCT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City='{$city}'";
 		}
 		//if we have state and city and county
 		if($state != null && $city != null && $county != null)
 		{
-			$sql = "SELECT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City='{$city}' AND County='{$county}'";
+			$sql = "SELECT DISTINCT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City='{$city}' AND County='{$county}'";
 		}
 		
+		$data = $wpdb->get_results($sql);
+		
+		return $data; 
+	}
+	
+	/**
+	 * 
+	 * @global class $wpdb wordpress database class
+	 * @param string $state 2 Letter state abbreviation
+	 * @return array the counties in the specific state
+	 */
+	public function getCounties($state)
+	{
+		global $wpdb;
+		
+		//no empty counties aloud :)
+		$sql = "SELECT DISTINCT County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND County != ''";
 		$data = $wpdb->get_results($sql);
 		
 		return $data;
 		
 	}
-	
 	
 }
