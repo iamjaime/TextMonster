@@ -80,7 +80,7 @@ class tm_model{
 	{
 		global $wpdb;
 		
-		$sql = "SELECT DISTINCT City FROM " . TABLE_TARGETS . " WHERE State='{$state}'";
+		$sql = "SELECT DISTINCT City FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City != ''";
 		$data = $wpdb->get_results($sql);
 		
 		return $data;
