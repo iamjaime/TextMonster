@@ -70,4 +70,20 @@ class tm_model{
 		
 	}
 	
+	/**
+	 * 
+	 * @global class $wpbd wordpress database class
+	 * @param string $state 2 letter state abbreviation
+	 * @return array the cities inside of this state
+	 */
+	public function getCities($state)
+	{
+		global $wpbd;
+		
+		$sql = "SELECT DISTINCT City FROM " . TABLE_TARGETS . " WHERE State='{$state}'";
+		$data = $wpdb->get_results($sql);
+		
+		return $data;
+		
+	}
 }

@@ -32,7 +32,10 @@ class tm_activate{
 			//lets drop our tables!
 			$aTables[] = TABLE_USERS;
 			$aTables[] = TABLE_AUTH_LINES;
-			$aTables[] = TABLE_TARGETS;
+			
+			//NEVER DROP THE TARGETS! it will take forever to put back in the db.
+			//unless we use SSH
+			//$aTables[] = TABLE_TARGETS;
 			
 			//now we drop the tables!
 			$this->dropTables($aTables);
