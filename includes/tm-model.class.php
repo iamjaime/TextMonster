@@ -47,6 +47,12 @@ class tm_model{
 			$sql = "SELECT DISTINCT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City='{$city}' AND County='{$county}'";
 		}
 		
+		//if we have state and county ( this is going to be the most used. )
+		if($state != null && $county != null)
+		{
+			$sql = "SELECT DISTINCT NPA, NXX, State, City, County FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND County='{$county}'";
+		}
+		
 		$data = $wpdb->get_results($sql);
 		
 		return $data; 
