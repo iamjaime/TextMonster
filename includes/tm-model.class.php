@@ -78,7 +78,7 @@ class tm_model{
 	 */
 	public function getCities($state)
 	{
-		global $wpbd;
+		global $wpdb;
 		
 		$sql = "SELECT DISTINCT City FROM " . TABLE_TARGETS . " WHERE State='{$state}'";
 		$data = $wpdb->get_results($sql);
