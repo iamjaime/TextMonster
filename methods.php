@@ -25,6 +25,7 @@ class TM_Methods{
 		add_action('tm_states', array($this, 'jsonStates')); //no params needed
 		add_action('tm_cities', array($this, 'jsonCities'),10,1); //state param
 		add_action('tm_counties', array($this, 'jsonCounties'),10,1); //state param
+		
 	}
 	
 	/**
@@ -83,4 +84,6 @@ class TM_Methods{
 		
 		echo json_encode($cities);
 	}
+	
+	
 }

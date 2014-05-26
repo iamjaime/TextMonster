@@ -33,7 +33,7 @@ add_action('admin_menu', 'tm_options_tab');
 function tm_options_tab()
 {
 	//lets create the main menu page ( the dashboard )
-	add_menu_page( 'TextMonster', 'TextMonster', 'manage_options', 'tm_main', 'tm_main_page', TM_PATH . '/images/tm-16x16.png' );	
+	add_menu_page( 'TextMonster', 'TextMonster', 'manage_options', 'tm_main', 'tm_main_page', 'dashicons-format-status');	
 	
 	//lets create a TextMonster sub page
 	//add_submenu_page( 'tm_main', 'Text Monster Settings', 'Settings', 'manage_options', 'tm_settings', 'tm_settings_page' );
