@@ -23,7 +23,7 @@ class TM_Methods{
 		add_action('tm_getAuthNums', array($tm_model, 'getAuthLine'),10,1); //gets array of authorized lines
 		add_action('tm_getTargets', array($this, 'jsonTargets'),10,3); //accepts 3 params
 		add_action('tm_states', array($this, 'jsonStates')); //no params needed
-		add_action('tm_cities', array($this, 'jsonCities'),10,1); //state param
+		add_action('tm_cities', array($this, 'jsonCities'),10,2); //state param, county param
 		add_action('tm_counties', array($this, 'jsonCounties'),10,1); //state param
 		
 	}
@@ -76,13 +76,15 @@ class TM_Methods{
 	 * 
 	 * @global class $tm_model
 	 * @param string $state 2 letter state abbreviation
+	 * @param string $county the county that belongs to the state
 	 */
-	public function jsonCities($state)
+	public function jsonCities($state, $county=null)
 	{
 		global $tm_model;
-		$cities = $tm_model->getCities($state);
-		
-		echo json_encode($cities);
+		$cities = $tm_model->getCities($state, $county);
+		$cities = json_encode($cities);
+
+		echo $cities;
 	}
 	
 	

@@ -80,13 +80,19 @@ class tm_model{
 	 * 
 	 * @global class $wpbd wordpress database class
 	 * @param string $state 2 letter state abbreviation
+	 * @param string $county the county in that state
 	 * @return array the cities inside of this state
 	 */
-	public function getCities($state)
+	public function getCities($state, $county=null)
 	{
 		global $wpdb;
 		
-		$sql = "SELECT DISTINCT City FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City != ''";
+		if($county != null){
+			$sql = "SELECT DISTINCT City FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City != '' AND County='{$county}'";
+		}else{
+			$sql = "SELECT DISTINCT City FROM " . TABLE_TARGETS . " WHERE State='{$state}' AND City != ''";
+		}
+		
 		$data = $wpdb->get_results($sql);
 		
 		return $data;
